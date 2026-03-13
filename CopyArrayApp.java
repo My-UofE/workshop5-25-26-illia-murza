@@ -13,12 +13,9 @@ public class CopyArrayApp{
         // to allocate a value into the created array at index i
         myVals[i] = Integer.parseInt(args[i]);
         // int item = myVals[myVals.length - 1];
-        if (unique_values.contains(args[i])) {
-            System.out.println("break");
-            continue;
+        if (unique_values.contains(Integer.parseInt(args[i]))) {
         } else {
-            System.out.println("else");
-            unique_values.add(args[i]);
+            unique_values.add(Integer.parseInt(args[i]));
         }
     }
     System.out.println("original values: " + Arrays.toString(myVals));
