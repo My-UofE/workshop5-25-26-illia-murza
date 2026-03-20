@@ -43,10 +43,35 @@ public class BookShopApp {
         String searchFor = "making software";
         System.out.println("Search for term(s) '" + searchFor + "' in title...");
 
-        for (int i = 0; i < stocklist.length; i++) {
-            if (searchFor.equals(stocklist.getName().toLowerCase())) {
-                stocklist.setQty();
+        for (int i = 0; i < stocklist.size(); i++) {
+            Book b = stocklist.get(i);
+            if (searchFor.equals(b.getName().toLowerCase())) {
+                int n = b.getQty() - 1;
+                b.setQty(n);
+                System.out.println("Updated quantity for '" + b.getName() + "' to " + b.getQty());
             }
+        }
+
+        String removeAll = "cobol";
+        String names = "";
+        boolean first = true;
+        for (int i = 0; i < stocklist.size(); i++) {
+            Book b = stocklist.get(i);
+            if (b.getName().toLowerCase().contains(removeAll.toLowerCase())) {
+                if (!first) {
+                    names += ", ";
+                }
+                names += b.getName();
+                first = false;
+                stocklist.remove(b);
+                i--;
+            }
+        }
+        System.out.println("Removing all books with term '" + removeAll + "' in title...");
+        System.out.println("Removed " + names + " books");
+
+        for (Book b : stocklist) {
+            System.out.printf(" | %-23s | %-28s | %6.2f | %03d | %n", b.getName(), b.getAuthorNames(), b.getPrice(), b.getQty());
         }
     }
 }
